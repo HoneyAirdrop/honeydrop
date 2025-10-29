@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🚀 [MEMECOIN ADI] Airdrop Formu</title>
+    <title>🚀 [MEMECOIN NAME] Airdrop Registration</title>
     <style>
+        /* Solana Theme & Modern Look */
         body { 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
             background-color: #121212; 
@@ -13,20 +14,31 @@
             padding: 20px; 
         }
         .container {
-            max-width: 550px;
+            max-width: 600px;
             margin: 50px auto;
             background-color: #1f1f1f;
             padding: 30px;
             border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            border: 1px solid #333;
         }
-        .sosyal a {
-            color: #00bcd4;
+        img.logo {
+            max-width: 120px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border: 3px solid #9945FF; /* Solana Moru */
+        }
+        .social a {
+            color: #00bcd4; /* Turkuaz */
             margin: 0 15px;
             text-decoration: none;
             font-weight: 600;
+            transition: color 0.3s;
         }
-        .input-alan {
+        .social a:hover {
+            color: #E0E0E0;
+        }
+        .input-area {
             margin-top: 25px;
             padding: 15px;
             background-color: #2c2c2c;
@@ -34,34 +46,62 @@
         }
         #addressInput {
             width: 80%;
-            padding: 10px;
+            padding: 12px;
             margin-bottom: 15px;
             border: 1px solid #444;
             border-radius: 5px;
             background-color: #333;
             color: white;
+            font-size: 14px;
         }
         #sendButton {
             padding: 10px 30px;
-            background-color: #4CAF50; /* Yeşil buton */
+            background-color: #9945FF; /* Solana Moru */
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            font-weight: bold;
             transition: background-color 0.3s;
         }
         #sendButton:hover {
-            background-color: #45a049;
+            background-color: #8039d6;
         }
         #message {
             margin-top: 20px;
             font-weight: bold;
-            color: #ff9800; /* Turuncu uyarı rengi */
+            min-height: 20px;
         }
-        img.logo {
-            max-width: 120px;
-            border-radius: 10px;
-            margin-bottom: 15px;
+        /* Countdown Styles */
+        .countdown-box {
+            background-color: #3e4451;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 5px solid #00bcd4;
+        }
+        .countdown-timer span {
+            display: inline-block;
+            margin: 0 10px;
+            font-size: 2em;
+            color: #E0E0E0;
+            line-height: 1.2;
+        }
+        .countdown-timer small {
+            display: block;
+            font-size: 0.5em;
+            color: #aaa;
+        }
+        /* Copy Button Style */
+        .copy-btn {
+            background: #444;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+            font-size: 0.9em;
         }
     </style>
 </head>
@@ -70,44 +110,117 @@
 <div class="container">
     
     <img class="logo" src="logo.png" alt="Memecoin Logo">
-    <h1>💸 [MEMECOIN ADI] Erken Airdrop Kaydı 💸</h1>
-    <p>Erken destekçimiz olduğunuz için teşekkürler! Airdrop dağıtım listemize girmek için Solana (Phantom) cüzdan adresinizi aşağıya girin.</p>
+    <h1>💸 [Honey Airdrop] Early Airdrop Registration 💸</h1>
+    <p>Thank you for being an early supporter! Submit your Solana (Phantom/Sollet) wallet address below to enter our exclusive airdrop list.</p>
 
-    <div class="sosyal">
-        <a href="[TWITTER LİNKİNİZ]" target="_blank">Twitter</a> |
-        <a href="[TELEGRAM LİNKİNİZ]" target="_blank">Telegram</a> |
-        <a href="[PUMPFUN LİNKİNİZ]" target="_blank">Pump.fun</a>
+    <div class="social">
+        <a href="[https://x.com/]" target="_blank">Twitter</a> |
+        <a href="[https://web.telegram.org/]" target="_blank">Telegram</a> |
+        <a href="[https://pump.fun/]" target="_blank">Pump.fun</a>
+    </div>
+    
+    <div style="margin-top: 20px; background-color: #2c2c2c; padding: 10px; border-radius: 5px; border: 1px dashed #00bcd4;">
+        <p style="font-size: 0.9em; margin: 0; color: #aaa;">TOKEN CONTRACT ADDRESS (Tap to copy)</p>
+        <span id="contractAddress" style="font-weight: bold; font-size: 1.1em; color: #fff;">[YOUR TOKEN CONTRACT ADDRESS HERE]</span>
+        <button class="copy-btn" onclick="copyToClipboard('contractAddress', 'copyMessage1')">Copy</button>
+        <span id="copyMessage1" style="color: #4CAF50; font-size: 0.9em; margin-left: 10px;"></span>
     </div>
 
-    <div class="input-alan">
-        <input type="text" id="addressInput" placeholder="Solana Cüzdan Adresinizi Girin (Örn: 9ewT...L9A)">
-        <button id="sendButton" onclick="sendAddress()">GÖNDER</button>
+    <div class="countdown-box">
+        <p style="margin-bottom: 5px; font-weight: bold; color: #00bcd4;">AIRDROP REGISTRATION ENDS IN:</p>
+        <div class="countdown-timer" id="countdown">
+            </div>
+    </div>
+    
+    <div class="input-area">
+        <p style="font-weight: bold;">Submit your Solana Wallet Address:</p>
+        <input type="text" id="addressInput" placeholder="Enter your Solana Wallet Address (e.g., 9ewT...L9A)">
+        <button id="sendButton" onclick="sendAddress()">SUBMIT</button>
         <div id="message"></div>
     </div>
     
 </div>
 
 <script>
+    // --- JAVASCRIPT LOGIC ---
+
+    // 1. COUNTDOWN TIMER
+    // Set the date 3 days from now
+    const endDate = new Date();
+    endDate.setDate(endDate.getDate() + 3);
+
+    const countdownElement = document.getElementById('countdown');
+
+    function updateCountdown() {
+        const now = new Date().getTime();
+        const distance = endDate.getTime() - now;
+
+        // Time calculations for days, hours, minutes and seconds
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Display the result
+        countdownElement.innerHTML = 
+            `<span>${days} <small>DAYS</small></span>` + 
+            `<span>${hours} <small>HOURS</small></span>` + 
+            `<span>${minutes} <small>MINUTES</small></span>` + 
+            `<span>${seconds} <small>SECONDS</small></span>`;
+
+        // If the count down is finished, write some text
+        if (distance < 0) {
+            clearInterval(countdownInterval);
+            countdownElement.innerHTML = "<span style='color: #f44336; font-size: 1.5em;'>REGISTRATION CLOSED!</span>";
+            document.getElementById('sendButton').disabled = true;
+        }
+    }
+
+    // Update the count down every 1 second
+    const countdownInterval = setInterval(updateCountdown, 1000);
+    updateCountdown(); // Run immediately so the timer doesn't wait 1 second to start
+
+    // 2. ADDRESS SUBMISSION (No Save Logic)
     function sendAddress() {
         const inputElement = document.getElementById('addressInput');
         const messageElement = document.getElementById('message');
         const address = inputElement.value.trim();
 
-        if (address.length < 32) {
-            // Basit bir kontrol: Solana adresi genelde 32 karakterden uzundur
-            messageElement.style.color = '#f44336'; // Kırmızı
-            messageElement.innerText = '⚠️ Lütfen geçerli bir Solana adresi girin.';
+        // Gelişmiş Solana Adresi Doğrulama (Basit kontrol)
+        // Solana adresleri 32-44 karakter uzunluğundadır ve 58 ile başlama eğilimindedir (bu tam bir kural değildir ama iyi bir göstergedir)
+        const isValidSolanaAddress = address.length >= 32 && address.length <= 44; 
+
+        if (!isValidSolanaAddress) {
+            messageElement.style.color = '#f44336'; // Red
+            messageElement.innerText = '⚠️ Please enter a valid Solana address (32-44 characters).';
         } else {
-            // Başarılı Mesajı: Sadece kullanıcıya geri bildirim veriyoruz, kaydetmiyoruz.
-            messageElement.style.color = '#4CAF50'; // Yeşil
-            messageElement.innerText = '✅ Adresiniz Airdrop Listesine Başarıyla Eklendi!';
+            // Success Message: Giving feedback without actually saving
+            messageElement.style.color = '#4CAF50'; // Green
+            messageElement.innerText = '✅ Your address has been successfully submitted to the Airdrop List!';
             
-            // Kullanıcının tekrar tekrar göndermesini engellemek için butonu devre dışı bırak
+            // Disable the button to prevent multiple submissions
             document.getElementById('sendButton').disabled = true;
+            document.getElementById('sendButton').innerText = 'SUBMITTED';
             
-            // (Opsiyonel: Cüzdan adresini temizle)
+            // Optional: Clear the wallet address
             inputElement.value = '';
+            inputElement.placeholder = address; 
+            inputElement.disabled = true;
         }
+    }
+
+    // 3. COPY TO CLIPBOARD FUNCTION
+    function copyToClipboard(elementId, messageId) {
+        const textToCopy = document.getElementById(elementId).innerText;
+        navigator.clipboard.writeText(textToCopy).then(() => {
+            const messageElement = document.getElementById(messageId);
+            messageElement.innerText = "Copied!";
+            setTimeout(() => {
+                messageElement.innerText = "";
+            }, 2000);
+        }).catch(err => {
+            console.error('Could not copy text: ', err);
+        });
     }
 </script>
 
