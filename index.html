@@ -111,7 +111,19 @@
 <div class="container">
     
     <img class="logo" src="logo.png" alt="Memecoin Logo">
-    <h1>💸Honey Airdrop Airdrop Registration💸</h1>
+    <div id="language-switcher" style="position: absolute; top: 20px; right: 20px;">
+    <select id="langSelector" onchange="changeLanguage(this.value)">
+        <option value="en">English</option>
+        <option value="tr">Türkçe</option>
+        <option value="ar">العربية (Arapça)</option>
+        <option value="es">Español (İspanyolca)</option>
+        <option value="it">Italiano (İtalyanca)</option>
+        <option value="fr">Français (Fransızca)</option>
+        <option value="ru">Русский (Rusça)</option>
+    </select>
+</div>
+    
+    <h1>🚀 Honey Airdrop Registration</h1>
     <p>Thank you for being an early supporter! Submit your Solana (Phantom/Sollet) wallet address below to enter our exclusive airdrop list.</p>
 
     <div class="social">
@@ -143,113 +155,192 @@
 </div>
 
 <script>
-    // --- JAVASCRIPT LOGIC ---
+// --- JAVASCRIPT LOGIC (Düzeltilmiş Versiyon) ---
 
-    const SUBMISSION_KEY = 'airdrop_submitted'; // LocalStorage için anahtar
+// ***** 1. ÇEVİRİ VERİLERİ (Diğer dilleri buraya ekleyin) *****
+const translations = {
+    en: {
+        title: "💸 Honeydrop $DRP Early Airdrop Registration 💸",
+        description: "Thank you for being an early supporter! Submit your Solana (Phantom/Sollet) wallet address below to enter our exclusive airdrop list.",
+        submitPrompt: "Submit your Solana Wallet Address:",
+        placeholder: "Enter your Solana Wallet Address (e.g., 9ewT...L9A)",
+        submitBtn: "SUBMIT",
+        submittedBtn: "SUBMITTED",
+        closedBtn: "CLOSED",
+        contractLabel: "TOKEN CONTRACT ADDRESS (Tap to copy)",
+        countdownLabel: "AIRDROP REGISTRATION ENDS IN:",
+        days: "DAYS", hours: "HOURS", minutes: "MINUTES", seconds: "SECONDS",
+        errorInvalid: "⚠️ Please enter a valid Solana address (32-44 characters).",
+        errorSubmitted: "✅ An address has already been submitted from this device.",
+        success: "✅ Your address has been successfully submitted to the Airdrop List!",
+        closedTimer: "REGISTRATION CLOSED!"
+    },
+    tr: {
+        title: "💸 Honeydrop $DRP Erken Airdrop Kaydı 💸",
+        description: "Erken destekçimiz olduğunuz için teşekkürler! Özel airdrop listemize girmek için Solana (Phantom/Sollet) cüzdan adresinizi aşağıya gönderin.",
+        submitPrompt: "Solana Cüzdan Adresinizi Gönderin:",
+        placeholder: "Solana Cüzdan Adresinizi Girin (Örn: 9ewT...L9A)",
+        submitBtn: "GÖNDER",
+        submittedBtn: "GÖNDERİLDİ",
+        closedBtn: "KAPALI",
+        contractLabel: "TOKEN SÖZLEŞME ADRESİ (Kopyalamak için tıklayın)",
+        countdownLabel: "AİRDRОP KAYDI SONA ERİYOR:",
+        days: "GÜN", hours: "SAAT", minutes: "DAKİKA", seconds: "SANİYE",
+        errorInvalid: "⚠️ Lütfen geçerli bir Solana adresi girin (32-44 karakter).",
+        errorSubmitted: "✅ Bu cihazdan bir adres zaten gönderildi.",
+        success: "✅ Adresiniz Airdrop Listesine Başarıyla Eklendi!",
+        closedTimer: "KAYIT KAPANDI!"
+    },
+    // Arapça, İspanyolca, Rusça, Fransızca, İtalyanca çevirileri buraya ekleyin.
+};
 
-    // *** 🎯 BURAYI DEĞİŞTİRİN: Bitiş tarihini güncelleyin! 🎯 ***
-    // Örn: 3 Kasım 2025, saat 15:00:00 (YIL, AY (0-11), GÜN, SAAT, DAKİKA, SANİYE)
-    // Şimdiki tarihe (30 Ekim) 4 gün ekleyerek 3 Kasım'a ayarlanmıştır.
-    const endDate = new Date(2025, 10, 3, 15, 0, 0); 
-    const countdownElement = document.getElementById('countdown');
+let currentLang = 'en'; // Varsayılan dil
+const SUBMISSION_KEY = 'airdrop_submitted';
+const endDate = new Date(2025, 10, 3, 15, 0, 0); // Sadece bir kere tanımlanmalı!
+const countdownElement = document.getElementById('countdown');
 
 
-    // Sayfa yüklendiğinde kontrolü yapan fonksiyon
-    function checkSubmissionStatus() {
-        const messageElement = document.getElementById('message');
-        const sendButton = document.getElementById('sendButton');
-        const inputElement = document.getElementById('addressInput');
+// Yeni Fonksiyon: Metinleri günceller
+function updateTexts(lang) {
+    const t = translations[lang];
+    if (!t) return;
 
-        if (localStorage.getItem(SUBMISSION_KEY)) {
-            // Eğer cihaz daha önce göndermişse
-            messageElement.style.color = '#ff9800'; // Turuncu
-            messageElement.innerText = '✅ An address has already been submitted from this device.';
-            sendButton.disabled = true;
-            sendButton.innerText = 'SUBMITTED';
-            inputElement.disabled = true;
-        } else if (new Date().getTime() > endDate.getTime()) {
-             // Geri sayım bittiyse
-            sendButton.disabled = true;
-            sendButton.innerText = 'CLOSED';
-            inputElement.disabled = true;
-            messageElement.innerText = 'Registration is closed.';
-        }
-    }
-
-
-    // 1. COUNTDOWN TIMER
-    function updateCountdown() {
-        const now = new Date().getTime();
-        const distance = endDate.getTime() - now;
-        
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        countdownElement.innerHTML = 
-            `<span>${days} <small>DAYS</small></span>` + 
-            `<span>${hours} <small>HOURS</small></span>` + 
-            `<span>${minutes} <small>MINUTES</small></span>` + 
-            `<span>${seconds} <small>SECONDS</small></span>`;
-
-        if (distance < 0) {
-            clearInterval(countdownInterval);
-            countdownElement.innerHTML = "<span style='color: #f44336; font-size: 1.5em;'>REGISTRATION CLOSED!</span>";
-            document.getElementById('sendButton').disabled = true;
-            document.getElementById('sendButton').innerText = 'CLOSED';
-            document.getElementById('addressInput').disabled = true;
-        }
-    }
-
-    const countdownInterval = setInterval(updateCountdown, 1000);
+    // 🎯 DOM Metinlerini Güncelleme
+    document.querySelector('h1').innerText = t.title;
+    document.querySelector('.container > p:not(.countdown-box p)').innerText = t.description; 
+    document.querySelector('.input-area p:first-child').innerText = t.submitPrompt;
+    document.getElementById('addressInput').placeholder = t.placeholder;
+    document.querySelector('[id^="contractAddress"]').previousElementSibling.innerText = t.contractLabel;
+    document.querySelector('.countdown-box p:first-child').innerText = t.countdownLabel;
+    
+    // Buton ve Durum kontrolünü güncelle
+    checkSubmissionStatus(); 
     updateCountdown(); 
-    checkSubmissionStatus(); // Sayfa yüklendiğinde hemen kontrol et!
+}
 
+// Dil değiştirme olayını yakalar
+function changeLanguage(lang) {
+    currentLang = lang;
+    updateTexts(lang);
+    localStorage.setItem('airdrop_lang', lang); 
+}
 
-    // 2. ADDRESS SUBMISSION
-    function sendAddress() {
-        const inputElement = document.getElementById('addressInput');
-        const messageElement = document.getElementById('message');
-        const sendButton = document.getElementById('sendButton');
-        const address = inputElement.value.trim();
+// Sayfa yüklendiğinde kontrolü yapan fonksiyon (LocalStorage)
+function checkSubmissionStatus() {
+    const messageElement = document.getElementById('message');
+    const sendButton = document.getElementById('sendButton');
+    const inputElement = document.getElementById('addressInput');
+    const t = translations[currentLang]; // Mevcut dili al
 
-        // Gelişmiş Solana Adresi Doğrulama (Basit kontrol)
-        const isValidSolanaAddress = address.length >= 32 && address.length <= 44; 
-
-        if (!isValidSolanaAddress) {
-            messageElement.style.color = '#f44336'; // Red
-            messageElement.innerText = '⚠️ Please enter a valid Solana address (32-44 characters).';
-        } else {
-            // Başarı Mesajı
-            messageElement.style.color = '#4CAF50'; // Green
-            messageElement.innerText = '✅ Your address has been successfully submitted to the Airdrop List!';
-            
-            // Bu cihazdan gönderim yapıldığını kaydet!
-            localStorage.setItem(SUBMISSION_KEY, 'true'); 
-            
-            // Butonu ve giriş alanını devre dışı bırak
-            sendButton.disabled = true;
-            sendButton.innerText = 'SUBMITTED';
-            inputElement.disabled = true;
-            inputElement.value = '';
-        }
+    if (localStorage.getItem(SUBMISSION_KEY)) {
+        // Eğer cihaz daha önce göndermişse
+        messageElement.style.color = '#ff9800'; 
+        messageElement.innerText = t.errorSubmitted;
+        sendButton.disabled = true;
+        sendButton.innerText = t.submittedBtn;
+        inputElement.disabled = true;
+    } else if (new Date().getTime() > endDate.getTime()) {
+         // Geri sayım bittiyse
+        sendButton.disabled = true;
+        sendButton.innerText = t.closedBtn;
+        inputElement.disabled = true;
+        messageElement.innerText = t.closedTimer;
+    } else {
+        // Butonu aktif hale getir ve metnini ayarla (Dil değişimi için önemli)
+        sendButton.disabled = false;
+        sendButton.innerText = t.submitBtn;
+        inputElement.disabled = false;
+        messageElement.innerText = ''; // Hata mesajını temizle
     }
+}
 
-    // 3. COPY TO CLIPBOARD FUNCTION
-    function copyToClipboard(elementId, messageId) {
-        const textToCopy = document.getElementById(elementId).innerText;
-        navigator.clipboard.writeText(textToCopy).then(() => {
-            const messageElement = document.getElementById(messageId);
-            messageElement.innerText = "Copied!";
-            setTimeout(() => {
-                messageElement.innerText = "";
-            }, 2000);
-        }).catch(err => {
-            console.error('Could not copy text: ', err);
-        });
+
+// 1. COUNTDOWN TIMER
+function updateCountdown() {
+    const now = new Date().getTime();
+    const distance = endDate.getTime() - now;
+    const t = translations[currentLang]; // Mevcut dili al
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    // DİLLERİ KULLAN
+    countdownElement.innerHTML = 
+        `<span>${days} <small>${t.days}</small></span>` + 
+        `<span>${hours} <small>${t.hours}</small></span>` + 
+        `<span>${minutes} <small>${t.minutes}</small></span>` + 
+        `<span>${seconds} <small>${t.seconds}</small></span>`;
+
+    if (distance < 0) {
+        clearInterval(countdownInterval);
+        countdownElement.innerHTML = `<span style='color: #f44336; font-size: 1.5em;'>${t.closedTimer}</span>`;
+        document.getElementById('sendButton').disabled = true;
+        document.getElementById('sendButton').innerText = t.closedBtn;
+        document.getElementById('addressInput').disabled = true;
     }
+}
+
+
+// 2. ADDRESS SUBMISSION
+function sendAddress() {
+    const inputElement = document.getElementById('addressInput');
+    const messageElement = document.getElementById('message');
+    const sendButton = document.getElementById('sendButton');
+    const address = inputElement.value.trim();
+    const t = translations[currentLang]; // Mevcut dili al
+
+    // Gelişmiş Solana Adresi Doğrulama (Basit kontrol)
+    const isValidSolanaAddress = address.length >= 32 && address.length <= 44; 
+
+    if (!isValidSolanaAddress) {
+        messageElement.style.color = '#f44336'; // Red
+        messageElement.innerText = t.errorInvalid;
+    } else {
+        // Başarı Mesajı
+        messageElement.style.color = '#4CAF50'; // Green
+        messageElement.innerText = t.success;
+        
+        // Bu cihazdan gönderim yapıldığını kaydet!
+        localStorage.setItem(SUBMISSION_KEY, 'true'); 
+        
+        // Butonu ve giriş alanını devre dışı bırak
+        sendButton.disabled = true;
+        sendButton.innerText = t.submittedBtn;
+        inputElement.disabled = true;
+        inputElement.value = '';
+    }
+}
+
+// 3. COPY TO CLIPBOARD FUNCTION (Aynı kalıyor)
+function copyToClipboard(elementId, messageId) {
+    const textToCopy = document.getElementById(elementId).innerText;
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        const messageElement = document.getElementById(messageId);
+        messageElement.innerText = "Copied!";
+        setTimeout(() => {
+            messageElement.innerText = "";
+        }, 2000);
+    }).catch(err => {
+        console.error('Could not copy text: ', err);
+    });
+}
+
+// *** BAŞLANGIÇ YÜKLEME VE DİL AYARI ***
+window.onload = function() {
+    // LocalStorage'dan kayıtlı dili yükle
+    const savedLang = localStorage.getItem('airdrop_lang') || 'en';
+    document.getElementById('langSelector').value = savedLang;
+    
+    // Sayfanın tüm metinlerini ve durumunu ayarla
+    changeLanguage(savedLang); 
+};
+
+// Timer'ı başlat
+const countdownInterval = setInterval(updateCountdown, 1000);
 </script>
 
 </body>
 </html>
+
