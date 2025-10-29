@@ -145,105 +145,111 @@
 <script>
     // --- JAVASCRIPT LOGIC ---
 
-const SUBMISSION_KEY = 'airdrop_submitted'; // LocalStorage için anahtar
+    const SUBMISSION_KEY = 'airdrop_submitted'; // LocalStorage için anahtar
 
-// Sayaç Bitiş Tarihi (Örn: 2 Kasım 2025, saat 15:00:00)
-// Lütfen buradaki tarihi kendi sabit bitiş tarihinizle değiştirin
-const endDate = new Date(2025, 10, 2, 15, 0, 0); 
-const countdownElement = document.getElementById('countdown');
+    // *** 🎯 BURAYI DEĞİŞTİRİN: Bitiş tarihini güncelleyin! 🎯 ***
+    // Örn: 3 Kasım 2025, saat 15:00:00 (YIL, AY (0-11), GÜN, SAAT, DAKİKA, SANİYE)
+    // Şimdiki tarihe (30 Ekim) 4 gün ekleyerek 3 Kasım'a ayarlanmıştır.
+    const endDate = new Date(2025, 10, 3, 15, 0, 0); 
+    const countdownElement = document.getElementById('countdown');
 
-// Sayfa yüklendiğinde kontrolü hemen yapan fonksiyon
-function checkSubmissionStatus() {
-    const messageElement = document.getElementById('message');
-    const sendButton = document.getElementById('sendButton');
-    const inputElement = document.getElementById('addressInput');
 
-    if (localStorage.getItem(SUBMISSION_KEY)) {
-        // Eğer cihaz daha önce göndermişse
-        messageElement.style.color = '#ff9800'; // Turuncu
-        messageElement.innerText = '✅ Bu cihazdan bir adres zaten gönderildi. Tekrar gönderim yapılamaz.';
-        sendButton.disabled = true;
-        sendButton.innerText = 'GÖNDERİLDİ';
-        inputElement.disabled = true;
-        
-    } else if (new Date().getTime() > endDate.getTime()) {
-        // Geri sayım bittiyse (deneme amaçlı)
-        sendButton.disabled = true;
-        sendButton.innerText = 'KAPALI';
-        inputElement.disabled = true;
+    // Sayfa yüklendiğinde kontrolü yapan fonksiyon
+    function checkSubmissionStatus() {
+        const messageElement = document.getElementById('message');
+        const sendButton = document.getElementById('sendButton');
+        const inputElement = document.getElementById('addressInput');
+
+        if (localStorage.getItem(SUBMISSION_KEY)) {
+            // Eğer cihaz daha önce göndermişse
+            messageElement.style.color = '#ff9800'; // Turuncu
+            messageElement.innerText = '✅ An address has already been submitted from this device.';
+            sendButton.disabled = true;
+            sendButton.innerText = 'SUBMITTED';
+            inputElement.disabled = true;
+        } else if (new Date().getTime() > endDate.getTime()) {
+             // Geri sayım bittiyse
+            sendButton.disabled = true;
+            sendButton.innerText = 'CLOSED';
+            inputElement.disabled = true;
+            messageElement.innerText = 'Registration is closed.';
+        }
     }
-}
 
 
-// 1. COUNTDOWN TIMER (Aynı Kalıyor)
-function updateCountdown() {
-    const now = new Date().getTime();
-    const distance = endDate.getTime() - now;
-    // ... (Gün, saat, dakika, saniye hesaplamaları aynı) ...
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    // 1. COUNTDOWN TIMER
+    function updateCountdown() {
+        const now = new Date().getTime();
+        const distance = endDate.getTime() - now;
+        
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    countdownElement.innerHTML = 
-        `<span>${days} <small>DAYS</small></span>` + 
-        `<span>${hours} <small>HOURS</small></span>` + 
-        `<span>${minutes} <small>MINUTES</small></span>` + 
-        `<span>${seconds} <small>SECONDS</small></span>`;
+        countdownElement.innerHTML = 
+            `<span>${days} <small>DAYS</small></span>` + 
+            `<span>${hours} <small>HOURS</small></span>` + 
+            `<span>${minutes} <small>MINUTES</small></span>` + 
+            `<span>${seconds} <small>SECONDS</small></span>`;
 
-    if (distance < 0) {
-        clearInterval(countdownInterval);
-        countdownElement.innerHTML = "<span style='color: #f44336; font-size: 1.5em;'>REGISTRATION CLOSED!</span>";
-        document.getElementById('sendButton').disabled = true;
+        if (distance < 0) {
+            clearInterval(countdownInterval);
+            countdownElement.innerHTML = "<span style='color: #f44336; font-size: 1.5em;'>REGISTRATION CLOSED!</span>";
+            document.getElementById('sendButton').disabled = true;
+            document.getElementById('sendButton').innerText = 'CLOSED';
+            document.getElementById('addressInput').disabled = true;
+        }
     }
-}
 
-const countdownInterval = setInterval(updateCountdown, 1000);
-updateCountdown(); 
-checkSubmissionStatus(); // Sayfa yüklendiğinde hemen kontrol et!
+    const countdownInterval = setInterval(updateCountdown, 1000);
+    updateCountdown(); 
+    checkSubmissionStatus(); // Sayfa yüklendiğinde hemen kontrol et!
 
 
-// 2. ADDRESS SUBMISSION (Yeni Mantık)
-function sendAddress() {
-    const inputElement = document.getElementById('addressInput');
-    const messageElement = document.getElementById('message');
-    const sendButton = document.getElementById('sendButton');
-    const address = inputElement.value.trim();
+    // 2. ADDRESS SUBMISSION
+    function sendAddress() {
+        const inputElement = document.getElementById('addressInput');
+        const messageElement = document.getElementById('message');
+        const sendButton = document.getElementById('sendButton');
+        const address = inputElement.value.trim();
 
-    // Gelişmiş Solana Adresi Doğrulama (Basit kontrol)
-    const isValidSolanaAddress = address.length >= 32 && address.length <= 44; 
+        // Gelişmiş Solana Adresi Doğrulama (Basit kontrol)
+        const isValidSolanaAddress = address.length >= 32 && address.length <= 44; 
 
-    if (!isValidSolanaAddress) {
-        messageElement.style.color = '#f44336'; // Red
-        messageElement.innerText = '⚠️ Please enter a valid Solana address (32-44 characters).';
-    } else {
-        // *** BURASI YENİ VE ÖNEMLİ KISIM ***
-        
-        // 1. Kullanıcıya başarı mesajı göster
-        messageElement.style.color = '#4CAF50'; // Green
-        messageElement.innerText = '✅ Your address has been successfully submitted to the Airdrop List!';
-        
-        // 2. Bu cihazdan gönderim yapıldığını kaydet!
-        localStorage.setItem(SUBMISSION_KEY, 'true'); 
-        
-        // 3. Butonu ve giriş alanını devre dışı bırak
-        sendButton.disabled = true;
-        sendButton.innerText = 'SUBMITTED';
-        inputElement.disabled = true;
-        inputElement.value = '';
+        if (!isValidSolanaAddress) {
+            messageElement.style.color = '#f44336'; // Red
+            messageElement.innerText = '⚠️ Please enter a valid Solana address (32-44 characters).';
+        } else {
+            // Başarı Mesajı
+            messageElement.style.color = '#4CAF50'; // Green
+            messageElement.innerText = '✅ Your address has been successfully submitted to the Airdrop List!';
+            
+            // Bu cihazdan gönderim yapıldığını kaydet!
+            localStorage.setItem(SUBMISSION_KEY, 'true'); 
+            
+            // Butonu ve giriş alanını devre dışı bırak
+            sendButton.disabled = true;
+            sendButton.innerText = 'SUBMITTED';
+            inputElement.disabled = true;
+            inputElement.value = '';
+        }
     }
-}
 
-// 3. COPY TO CLIPBOARD FUNCTION (Aynı kalıyor)
-function copyToClipboard(elementId, messageId) {
-    const textToCopy = document.getElementById(elementId).innerText;
-    navigator.clipboard.writeText(textToCopy).then(() => {
-        const messageElement = document.getElementById(messageId);
-        messageElement.innerText = "Copied!";
-        setTimeout(() => {
-            messageElement.innerText = "";
-        }, 2000);
-    }).catch(err => {
-        console.error('Could not copy text: ', err);
-    });
-}
+    // 3. COPY TO CLIPBOARD FUNCTION
+    function copyToClipboard(elementId, messageId) {
+        const textToCopy = document.getElementById(elementId).innerText;
+        navigator.clipboard.writeText(textToCopy).then(() => {
+            const messageElement = document.getElementById(messageId);
+            messageElement.innerText = "Copied!";
+            setTimeout(() => {
+                messageElement.innerText = "";
+            }, 2000);
+        }).catch(err => {
+            console.error('Could not copy text: ', err);
+        });
+    }
+</script>
+
+</body>
+</html>
