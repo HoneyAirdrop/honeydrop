@@ -7,13 +7,17 @@
     <link rel="icon" type="image/png" href="favicon.png">
     <style>
         /* Solana Theme & Modern Look */
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            background-color: #121212; 
-            color: #E0E0E0; 
-            text-align: center; 
-            padding: 20px; 
-        }
+        body {
+    /* Eski background-color: #121212; satırını bu yeni blok ile değiştirin: */
+    background: linear-gradient(-45deg, #121212, #200030, #121212, #003333); /* Koyu, Mor ve Turkuaz tonları */
+    background-size: 400% 400%; /* Animasyonun hareket etmesi için boyutunu büyüt */
+    animation: gradient-animation 20s ease infinite; /* 20 saniyede yumuşakça tekrar et */
+
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    color: #E0E0E0; 
+    text-align: center; 
+    padding: 20px; 
+}
         .container {
             max-width: 600px;
             margin: 50px auto;
@@ -68,6 +72,11 @@
         #sendButton:hover {
             background-color: #8039d6;
         }
+        #sendButton.success-feedback {
+           /* BAŞARILI GÖNDERİM SONRASI GEÇİCİ RENK */
+            background-color: #4CAF50 !important; /* Yeşil ve zorunlu */
+            transition: background-color 0.1s;
+        }
         #message {
             margin-top: 20px;
             font-weight: bold;
@@ -104,6 +113,11 @@
             margin-left: 10px;
             font-size: 0.9em;
         }
+        @keyframes gradient-animation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
         /* --- DİL SEÇİM MENÜSÜ STİLİ --- */
 
 /* Select menüsünü gizleyen ve arkaplanı ayarlayan ana div */
@@ -146,6 +160,7 @@
 #langSelector:hover {
     background-color: #3e4451;
 }
+        
     </style>
 </head>
 <body>
@@ -157,11 +172,11 @@
     <select id="langSelector" onchange="changeLanguage(this.value)">
         <option value="en">English</option>
         <option value="tr">Türkçe</option>
-        <option value="ar">العربية (Arapça)</option>
-        <option value="es">Español (İspanyolca)</option>
-        <option value="it">Italiano (İtalyanca)</option>
-        <option value="fr">Français (Fransızca)</option>
-        <option value="ru">Русский (Rusça)</option>
+        <option value="ar">العربية</option>
+        <option value="es">Español</option>
+        <option value="it">Italiano</option>
+        <option value="fr">Français</option>
+        <option value="ru">Русский</option>
     </select>
 </div>
     
@@ -170,7 +185,7 @@
 
     <div class="social">
         <a href="https://x.com/honey_airdrop" target="_blank">Twitter</a> |
-        <a href="https://web.telegram.org/" target="_blank">Telegram</a> |
+        <a href="https://t.me/+JrOtzJUBL28xMjg0" target="_blank">Telegram</a> |
         <a href="https://pump.fun/" target="_blank">Pump.fun</a>
     </div>
     
@@ -201,15 +216,16 @@
 
 // ***** 1. ÇEVİRİ VERİLERİ (Diğer dilleri buraya ekleyin) *****
 const translations = {
+    // 1. İNGİLİZCE (EN - Zaten Mevcut)
     en: {
-        title: "💸 Honeydrop $DRP Early Airdrop Registration 💸",
+        title: "💸 Honeydrop Early Airdrop Registration 💸",
         description: "Thank you for being an early supporter! Submit your Solana (Phantom/Sollet) wallet address below to enter our exclusive airdrop list.",
         submitPrompt: "Submit your Solana Wallet Address:",
         placeholder: "Enter your Solana Wallet Address (e.g., 9ewT...L9A)",
         submitBtn: "SUBMIT",
         submittedBtn: "SUBMITTED",
         closedBtn: "CLOSED",
-        contractLabel: "TOKEN CONTRACT ADDRESS (Tap to copy)",
+        contractLabel: "TOKEN CONTRACT ADDRESS",
         countdownLabel: "AIRDROP REGISTRATION ENDS IN:",
         days: "DAYS", hours: "HOURS", minutes: "MINUTES", seconds: "SECONDS",
         errorInvalid: "⚠️ Please enter a valid Solana address (32-44 characters).",
@@ -217,8 +233,9 @@ const translations = {
         success: "✅ Your address has been successfully submitted to the Airdrop List!",
         closedTimer: "REGISTRATION CLOSED!"
     },
+    // 2. TÜRKÇE (TR - Zaten Mevcut)
     tr: {
-        title: "💸 Honeydrop $DRP Erken Airdrop Kaydı 💸",
+        title: "💸 Honeydrop Erken Airdrop Kaydı 💸",
         description: "Erken destekçimiz olduğunuz için teşekkürler! Özel airdrop listemize girmek için Solana (Phantom/Sollet) cüzdan adresinizi aşağıya gönderin.",
         submitPrompt: "Solana Cüzdan Adresinizi Gönderin:",
         placeholder: "Solana Cüzdan Adresinizi Girin (Örn: 9ewT...L9A)",
@@ -233,7 +250,91 @@ const translations = {
         success: "✅ Adresiniz Airdrop Listesine Başarıyla Eklendi!",
         closedTimer: "KAYIT KAPANDI!"
     },
-    // Arapça, İspanyolca, Rusça, Fransızca, İtalyanca çevirileri buraya ekleyin.
+    // 3. ARAPÇA (AR)
+    ar: {
+        title: "💸 تسجيل الإنزال الجوي المبكر لـ Honeydrop 💸",
+        description: "شكرًا لكونك داعمًا مبكرًا! أرسل عنوان محفظتك (Phantom/Sollet) أدناه للدخول في قائمة الإنزال الجوي الحصرية.",
+        submitPrompt: "أرسل عنوان محفظة سولانا الخاص بك:",
+        placeholder: "(مثال: 9ewT...L9A) أدخل عنوان محفظة سولانا الخاص بك",
+        submitBtn: "إرسال",
+        submittedBtn: "تم الإرسال",
+        closedBtn: "مغلق",
+        contractLabel: "عنوان عقد الرمز (اضغط للنسخ)",
+        countdownLabel: "تنتهي عملية التسجيل في الإنزال الجوي خلال:",
+        days: "أيام", hours: "ساعات", minutes: "دقائق", seconds: "ثواني",
+        errorInvalid: "⚠️ الرجاء إدخال عنوان سولانا صالح (32-44 حرفًا).",
+        errorSubmitted: "✅ تم بالفعل إرسال عنوان من هذا الجهاز.",
+        success: "✅ تم إضافة عنوانك بنجاح إلى قائمة الإنزال الجوي!",
+        closedTimer: "تم إغلاق التسجيل!"
+    },
+    // 4. İSPANYOLCA (ES)
+    es: {
+        title: "💸 Registro Anticipado de Airdrop Honeydrop 💸",
+        description: "¡Gracias por ser un early adopter! Envía tu dirección de billetera Solana (Phantom/Sollet) para entrar en nuestra lista exclusiva de airdrops.",
+        submitPrompt: "Envía tu Dirección de Billetera Solana:",
+        placeholder: "Ingresa tu Dirección de Billetera Solana (ej: 9ewT...L9A)",
+        submitBtn: "ENVIAR",
+        submittedBtn: "ENVIADO",
+        closedBtn: "CERRADO",
+        contractLabel: "DIRECCIÓN DEL CONTRATO (Toca para copiar)",
+        countdownLabel: "EL REGISTRO DEL AIRDROP TERMINA EN:",
+        days: "DÍAS", hours: "HORAS", minutes: "MINUTOS", seconds: "SEGUNDOS",
+        errorInvalid: "⚠️ Por favor, ingresa una dirección Solana válida (32-44 caracteres).",
+        errorSubmitted: "✅ Ya se ha enviado una dirección desde este dispositivo.",
+        success: "✅ ¡Tu dirección se ha enviado con éxito a la Lista de Airdrops!",
+        closedTimer: "¡REGISTRO CERRADO!"
+    },
+    // 5. İTALYANCA (IT)
+    it: {
+        title: "💸 Registrazione Airdrop Anticipata Honeydrop 💸",
+        description: "Grazie per essere un early supporter! Inserisci il tuo indirizzo di portafoglio Solana (Phantom/Sollet) per entrare nella nostra lista airdrop esclusiva.",
+        submitPrompt: "Invia il tuo Indirizzo Wallet Solana:",
+        placeholder: "Inserisci il tuo Indirizzo Wallet Solana (es: 9ewT...L9A)",
+        submitBtn: "INVIA",
+        submittedBtn: "INVIATO",
+        closedBtn: "CHIUSO",
+        contractLabel: "INDIRIZZO DEL CONTRATTO TOKEN (Tocca per copiare)",
+        countdownLabel: "LA REGISTRAZIONE AIRDROP TERMINA TRA:",
+        days: "GIORNI", hours: "ORE", minutes: "MINUTI", seconds: "SECONDI",
+        errorInvalid: "⚠️ Inserisci un indirizzo Solana valido (32-44 caratteri).",
+        errorSubmitted: "✅ Un indirizzo è già stato inviato da questo dispositivo.",
+        success: "✅ Il tuo indirizzo è stato inviato con successo alla Lista Airdrop!",
+        closedTimer: "REGISTRAZIONE CHIUSA!"
+    },
+    // 6. FRANSIZCA (FR)
+    fr: {
+        title: "💸 Inscription Airdrop Précoce Honeydrop 💸",
+        description: "Merci d'être un early supporter ! Soumettez votre adresse de portefeuille Solana (Phantom/Sollet) ci-dessous pour entrer dans notre liste airdrop exclusive.",
+        submitPrompt: "Soumettez votre Adresse de Portefeuille Solana :",
+        placeholder: "Entrez votre Adresse de Portefeuille Solana (ex : 9ewT...L9A)",
+        submitBtn: "SOUMETTRE",
+        submittedBtn: "SOUMIS",
+        closedBtn: "FERMÉ",
+        contractLabel: "ADRESSE DU CONTRAT TOKEN (Appuyez pour copier)",
+        countdownLabel: "FIN DES INSCRIPTIONS AIRDROP DANS :",
+        days: "JOURS", hours: "HEURES", minutes: "MINUTES", seconds: "SECONDES",
+        errorInvalid: "⚠️ Veuillez entrer une adresse Solana valide (32-44 caractères).",
+        errorSubmitted: "✅ Une adresse a déjà été soumise depuis cet appareil.",
+        success: "✅ Votre adresse a été soumise avec succès à la Liste Airdrop !",
+        closedTimer: "INSCRIPTION FERMÉE !"
+    },
+    // 7. RUSÇA (RU)
+    ru: {
+        title: "💸 Ранняя Регистрация Airdrop Honeydrop 💸",
+        description: "Спасибо за вашу раннюю поддержку! Отправьте свой адрес кошелька Solana (Phantom/Sollet) ниже, чтобы попасть в наш эксклюзивный список airdrop.",
+        submitPrompt: "Отправьте свой Адрес Кошелька Solana:",
+        placeholder: "Введите свой Адрес Кошелька Solana (например: 9ewT...L9A)",
+        submitBtn: "ОТПРАВИТЬ",
+        submittedBtn: "ОТПРАВЛЕНО",
+        closedBtn: "ЗАКРЫТО",
+        contractLabel: "АДРЕС КОНТРАКТА ТОКЕНА (Нажмите, чтобы скопировать)",
+        countdownLabel: "РЕГИСТРАЦИЯ AIRDROP ЗАВЕРШИТСЯ ЧЕРЕЗ:",
+        days: "ДНЕЙ", hours: "ЧАСОВ", minutes: "МИНУТ", seconds: "СЕКУНД",
+        errorInvalid: "⚠️ Пожалуйста, введите действительный адрес Solana (32-44 символа).",
+        errorSubmitted: "✅ Адрес уже был отправлен с этого устройства.",
+        success: "✅ Ваш адрес успешно добавлен в список Airdrop!",
+        closedTimer: "РЕГИСТРАЦИЯ ЗАКРЫТА!"
+    }
 };
 
 let currentLang = 'en'; // Varsayılan dil
@@ -325,13 +426,13 @@ function updateCountdown() {
 }
 
 
-// 2. ADDRESS SUBMISSION
+// 2. ADDRESS SUBMISSION (BUTON GERİ BİLDİRİMİ EKLENDİ)
 function sendAddress() {
     const inputElement = document.getElementById('addressInput');
     const messageElement = document.getElementById('message');
     const sendButton = document.getElementById('sendButton');
     const address = inputElement.value.trim();
-    const t = translations[currentLang]; // Mevcut dili al
+    const t = translations[currentLang]; 
 
     // Gelişmiş Solana Adresi Doğrulama (Basit kontrol)
     const isValidSolanaAddress = address.length >= 32 && address.length <= 44; 
@@ -344,14 +445,26 @@ function sendAddress() {
         messageElement.style.color = '#4CAF50'; // Green
         messageElement.innerText = t.success;
         
-        // Bu cihazdan gönderim yapıldığını kaydet!
-        localStorage.setItem(SUBMISSION_KEY, 'true'); 
+        // *** YENİ BUTON GERİ BİLDİRİM MANTIĞI BAŞLANGICI ***
         
-        // Butonu ve giriş alanını devre dışı bırak
+        // 1. Butona anında yeşil renk ver
+        sendButton.classList.add('success-feedback');
+        
+        // 2. Butonu ve giriş alanını devre dışı bırak
         sendButton.disabled = true;
         sendButton.innerText = t.submittedBtn;
         inputElement.disabled = true;
         inputElement.value = '';
+        
+        // 3. LocalStorage'a kaydet
+        localStorage.setItem(SUBMISSION_KEY, 'true'); 
+        
+        // 4. (Opsiyonel): 500 milisaniye sonra yeşil rengi kaldır (daha temiz görünmesi için)
+        setTimeout(() => {
+             sendButton.classList.remove('success-feedback');
+        }, 500);
+
+        // *** YENİ BUTON GERİ BİLDİRİM MANTIĞI BİTİŞİ ***
     }
 }
 
@@ -385,5 +498,6 @@ const countdownInterval = setInterval(updateCountdown, 1000);
 
 </body>
 </html>
+
 
 
