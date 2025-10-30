@@ -104,6 +104,48 @@
             margin-left: 10px;
             font-size: 0.9em;
         }
+        /* --- DİL SEÇİM MENÜSÜ STİLİ --- */
+
+/* Select menüsünü gizleyen ve arkaplanı ayarlayan ana div */
+#language-switcher {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    /* Renk ve font ayarları */
+    color: white; 
+    font-size: 14px;
+}
+
+/* Kendine ait varsayılan stili kaldıran ve sitenin temasına uyduran kod */
+#langSelector {
+    /* Görünüm sıfırlama */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    
+    /* Boyut ve dolgu */
+    padding: 8px 12px; 
+    padding-right: 30px; /* Ok simgesi için yer açar */
+    
+    /* Renkler */
+    background-color: #2c2c2c; /* Koyu gri arkaplan */
+    color: #00bcd4; /* Turkuaz metin */
+    border: 1px solid #9945FF; /* Solana Moru çerçeve */
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+/* Seçenekleri (option) daha okunur hale getirir */
+#langSelector option {
+    background-color: #1f1f1f; /* Koyu arkaplan */
+    color: #E0E0E0;
+}
+
+/* Menü üzerine gelindiğinde rengi değiştirir */
+#langSelector:hover {
+    background-color: #3e4451;
+}
     </style>
 </head>
 <body>
@@ -343,4 +385,5 @@ const countdownInterval = setInterval(updateCountdown, 1000);
 
 </body>
 </html>
+
 
