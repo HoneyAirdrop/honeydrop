@@ -171,6 +171,7 @@
     <div id="language-switcher" style="position: absolute; top: 20px; right: 20px;">
     <select id="langSelector" onchange="changeLanguage(this.value)">
         <option value="en">English</option>
+        <option value="de">Deutsch</option>
         <option value="tr">Türkçe</option>
         <option value="ar">العربية</option>
         <option value="es">Español</option>
@@ -219,7 +220,7 @@ const translations = {
     // 1. İNGİLİZCE (EN - Zaten Mevcut)
     en: {
         title: "💸 Honeydrop Early Airdrop Registration 💸",
-        description: "Thank you for being an early supporter! Submit your Solana (Phantom/Sollet) wallet address below to enter our exclusive airdrop list.",
+        description: "Thank you for being an early supporter! Submit your Solana wallet address below to enter our exclusive airdrop list.",
         submitPrompt: "Submit your Solana Wallet Address:",
         placeholder: "Enter your Solana Wallet Address (e.g., 9ewT...L9A)",
         submitBtn: "SUBMIT",
@@ -236,13 +237,13 @@ const translations = {
     // 2. TÜRKÇE (TR - Zaten Mevcut)
     tr: {
         title: "💸 Honeydrop Erken Airdrop Kaydı 💸",
-        description: "Erken destekçimiz olduğunuz için teşekkürler! Özel airdrop listemize girmek için Solana (Phantom/Sollet) cüzdan adresinizi aşağıya gönderin.",
+        description: "Erken destekçimiz olduğunuz için teşekkürler! Özel airdrop listemize girmek için Solana cüzdan adresinizi aşağıya gönderin.",
         submitPrompt: "Solana Cüzdan Adresinizi Gönderin:",
         placeholder: "Solana Cüzdan Adresinizi Girin (Örn: 9ewT...L9A)",
         submitBtn: "GÖNDER",
         submittedBtn: "GÖNDERİLDİ",
         closedBtn: "KAPALI",
-        contractLabel: "TOKEN SÖZLEŞME ADRESİ (Kopyalamak için tıklayın)",
+        contractLabel: "TOKEN SÖZLEŞME ADRESİ",
         countdownLabel: "AİRDRОP KAYDI SONA ERİYOR:",
         days: "GÜN", hours: "SAAT", minutes: "DAKİKA", seconds: "SANİYE",
         errorInvalid: "⚠️ Lütfen geçerli bir Solana adresi girin (32-44 karakter).",
@@ -253,13 +254,13 @@ const translations = {
     // 3. ARAPÇA (AR)
     ar: {
         title: "💸 تسجيل الإنزال الجوي المبكر لـ Honeydrop 💸",
-        description: "شكرًا لكونك داعمًا مبكرًا! أرسل عنوان محفظتك (Phantom/Sollet) أدناه للدخول في قائمة الإنزال الجوي الحصرية.",
+        description: "شكرًا لكونك داعمًا مبكرًا! أرسل عنوان محفظتك أدناه للدخول في قائمة الإنزال الجوي الحصرية.",
         submitPrompt: "أرسل عنوان محفظة سولانا الخاص بك:",
         placeholder: "(مثال: 9ewT...L9A) أدخل عنوان محفظة سولانا الخاص بك",
         submitBtn: "إرسال",
         submittedBtn: "تم الإرسال",
         closedBtn: "مغلق",
-        contractLabel: "عنوان عقد الرمز (اضغط للنسخ)",
+        contractLabel: "عنوان عقد الرمز",
         countdownLabel: "تنتهي عملية التسجيل في الإنزال الجوي خلال:",
         days: "أيام", hours: "ساعات", minutes: "دقائق", seconds: "ثواني",
         errorInvalid: "⚠️ الرجاء إدخال عنوان سولانا صالح (32-44 حرفًا).",
@@ -270,13 +271,13 @@ const translations = {
     // 4. İSPANYOLCA (ES)
     es: {
         title: "💸 Registro Anticipado de Airdrop Honeydrop 💸",
-        description: "¡Gracias por ser un early adopter! Envía tu dirección de billetera Solana (Phantom/Sollet) para entrar en nuestra lista exclusiva de airdrops.",
+        description: "¡Gracias por ser un early adopter! Envía tu dirección de billetera Solana para entrar en nuestra lista exclusiva de airdrops.",
         submitPrompt: "Envía tu Dirección de Billetera Solana:",
         placeholder: "Ingresa tu Dirección de Billetera Solana (ej: 9ewT...L9A)",
         submitBtn: "ENVIAR",
         submittedBtn: "ENVIADO",
         closedBtn: "CERRADO",
-        contractLabel: "DIRECCIÓN DEL CONTRATO (Toca para copiar)",
+        contractLabel: "DIRECCIÓN DEL CONTRATO",
         countdownLabel: "EL REGISTRO DEL AIRDROP TERMINA EN:",
         days: "DÍAS", hours: "HORAS", minutes: "MINUTOS", seconds: "SEGUNDOS",
         errorInvalid: "⚠️ Por favor, ingresa una dirección Solana válida (32-44 caracteres).",
@@ -287,13 +288,13 @@ const translations = {
     // 5. İTALYANCA (IT)
     it: {
         title: "💸 Registrazione Airdrop Anticipata Honeydrop 💸",
-        description: "Grazie per essere un early supporter! Inserisci il tuo indirizzo di portafoglio Solana (Phantom/Sollet) per entrare nella nostra lista airdrop esclusiva.",
+        description: "Grazie per essere un early supporter! Inserisci il tuo indirizzo di portafoglio Solana per entrare nella nostra lista airdrop esclusiva.",
         submitPrompt: "Invia il tuo Indirizzo Wallet Solana:",
         placeholder: "Inserisci il tuo Indirizzo Wallet Solana (es: 9ewT...L9A)",
         submitBtn: "INVIA",
         submittedBtn: "INVIATO",
         closedBtn: "CHIUSO",
-        contractLabel: "INDIRIZZO DEL CONTRATTO TOKEN (Tocca per copiare)",
+        contractLabel: "INDIRIZZO DEL CONTRATTO TOKEN",
         countdownLabel: "LA REGISTRAZIONE AIRDROP TERMINA TRA:",
         days: "GIORNI", hours: "ORE", minutes: "MINUTI", seconds: "SECONDI",
         errorInvalid: "⚠️ Inserisci un indirizzo Solana valido (32-44 caratteri).",
@@ -304,13 +305,13 @@ const translations = {
     // 6. FRANSIZCA (FR)
     fr: {
         title: "💸 Inscription Airdrop Précoce Honeydrop 💸",
-        description: "Merci d'être un early supporter ! Soumettez votre adresse de portefeuille Solana (Phantom/Sollet) ci-dessous pour entrer dans notre liste airdrop exclusive.",
+        description: "Merci d'être un early supporter ! Soumettez votre adresse de portefeuille Solana ci-dessous pour entrer dans notre liste airdrop exclusive.",
         submitPrompt: "Soumettez votre Adresse de Portefeuille Solana :",
         placeholder: "Entrez votre Adresse de Portefeuille Solana (ex : 9ewT...L9A)",
         submitBtn: "SOUMETTRE",
         submittedBtn: "SOUMIS",
         closedBtn: "FERMÉ",
-        contractLabel: "ADRESSE DU CONTRAT TOKEN (Appuyez pour copier)",
+        contractLabel: "ADRESSE DU CONTRAT TOKEN",
         countdownLabel: "FIN DES INSCRIPTIONS AIRDROP DANS :",
         days: "JOURS", hours: "HEURES", minutes: "MINUTES", seconds: "SECONDES",
         errorInvalid: "⚠️ Veuillez entrer une adresse Solana valide (32-44 caractères).",
@@ -321,19 +322,36 @@ const translations = {
     // 7. RUSÇA (RU)
     ru: {
         title: "💸 Ранняя Регистрация Airdrop Honeydrop 💸",
-        description: "Спасибо за вашу раннюю поддержку! Отправьте свой адрес кошелька Solana (Phantom/Sollet) ниже, чтобы попасть в наш эксклюзивный список airdrop.",
+        description: "Спасибо за вашу раннюю поддержку! Отправьте свой адрес кошелька Solana ниже, чтобы попасть в наш эксклюзивный список airdrop.",
         submitPrompt: "Отправьте свой Адрес Кошелька Solana:",
         placeholder: "Введите свой Адрес Кошелька Solana (например: 9ewT...L9A)",
         submitBtn: "ОТПРАВИТЬ",
         submittedBtn: "ОТПРАВЛЕНО",
         closedBtn: "ЗАКРЫТО",
-        contractLabel: "АДРЕС КОНТРАКТА ТОКЕНА (Нажмите, чтобы скопировать)",
+        contractLabel: "АДРЕС КОНТРАКТА ТОКЕНА",
         countdownLabel: "РЕГИСТРАЦИЯ AIRDROP ЗАВЕРШИТСЯ ЧЕРЕЗ:",
         days: "ДНЕЙ", hours: "ЧАСОВ", minutes: "МИНУТ", seconds: "СЕКУНД",
         errorInvalid: "⚠️ Пожалуйста, введите действительный адрес Solana (32-44 символа).",
         errorSubmitted: "✅ Адрес уже был отправлен с этого устройства.",
         success: "✅ Ваш адрес успешно добавлен в список Airdrop!",
         closedTimer: "РЕГИСТРАЦИЯ ЗАКРЫТА!"
+    }
+    // 8. ALMANCA (DE)
+    de: {
+        title: "💸 Honeydrop $DRP Frühe Airdrop-Registrierung 💸",
+        description: "Vielen Dank, dass Sie uns frühzeitig unterstützen! Senden Sie Ihre Solana Wallet-Adresse unten ein, um in unsere exklusive Airdrop-Liste aufgenommen zu werden.",
+        submitPrompt: "Senden Sie Ihre Solana Wallet-Adresse:",
+        placeholder: "Geben Sie Ihre Solana Wallet-Adresse ein (z.B. 9ewT...L9A)",
+        submitBtn: "SENDEN",
+        submittedBtn: "GESENDET",
+        closedBtn: "GESCHLOSSEN",
+        contractLabel: "TOKEN-VERTRAGSADRESSE",
+        countdownLabel: "AIRDROP-REGISTRIERUNG ENDET IN:",
+        days: "TAGE", hours: "STUNDEN", minutes: "MINUTEN", seconds: "SEKUNDEN",
+        errorInvalid: "⚠️ Bitte geben Sie eine gültige Solana-Adresse ein (32-44 Zeichen).",
+        errorSubmitted: "✅ Von diesem Gerät wurde bereits eine Adresse übermittelt.",
+        success: "✅ Ihre Adresse wurde erfolgreich zur Airdrop-Liste hinzugefügt!",
+        closedTimer: "REGISTRIERUNG GESCHLOSSEN!"
     }
 };
 
@@ -498,6 +516,7 @@ const countdownInterval = setInterval(updateCountdown, 1000);
 
 </body>
 </html>
+
 
 
 
