@@ -118,6 +118,28 @@
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
+
+/* --- YENİ MÜZİK KONTROL DÜĞMESİ STİLİ --- */
+.fixed-control {
+    position: fixed; /* Ekranda sabit kalmasını sağlar */
+    top: 20px;       /* Üstten 20 piksel boşluk */
+    left: 20px;      /* Soldan 20 piksel boşluk */
+    z-index: 1000;   /* Diğer her şeyin üstünde görünmesini sağlar */
+
+    /* Görünüm ayarları (Solana temasına uygun) */
+    background-color: #2c2c2c; /* Koyu arkaplan */
+    color: #00bcd4; /* Turkuaz metin */
+    border: 1px solid #9945FF; /* Mor çerçeve */
+    border-radius: 6px;
+    padding: 8px 12px; 
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.fixed-control:hover {
+    background-color: #3e4451;
+}
         /* --- DİL SEÇİM MENÜSÜ STİLİ --- */
 
 /* Select menüsünü gizleyen ve arkaplanı ayarlayan ana div */
@@ -164,6 +186,12 @@
     </style>
 </head>
 <body>
+
+<button id="musicToggle" class="fixed-control">
+    ▶️
+</button>
+    
+<audio id="backgroundAudio" src="background_music.mp3" loop></audio>
 
 <div class="container">
     
@@ -510,12 +538,35 @@ window.onload = function() {
     changeLanguage(savedLang); 
 };
 
+// --- MÜZİK KONTROL LOGİĞİ ---
+
+const audio = document.getElementById('backgroundAudio');
+const toggleButton = document.getElementById('musicToggle');
+let isPlaying = false;
+
+toggleButton.addEventListener('click', () => {
+    if (isPlaying) {
+        audio.pause();
+        toggleButton.innerHTML = '▶️'; // Oynat simgesi
+    } else {
+        // Kullanıcı etkileşimi ile ses çalmaya başlar
+        audio.play().then(() => {
+            toggleButton.innerHTML = '⏸️'; // Duraklat simgesi
+        }).catch(error => {
+            console.error("Müzik çalma engellendi:", error);
+            toggleButton.innerHTML = '🔇'; // Sessiz simgesi (Hata durumunda)
+        });
+    }
+    isPlaying = !isPlaying;
+});
+
 // Timer'ı başlat
 const countdownInterval = setInterval(updateCountdown, 1000);
 </script>
 
 </body>
 </html>
+
 
 
 
