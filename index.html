@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🚀 Honey Airdrop Registration</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="icon" type="image/png" href="favicon.png">
     <style>
         /* Solana Theme & Modern Look */
@@ -138,6 +139,8 @@
 }
 
 .fixed-control:hover {
+    font-size: 18px; /* İkonun büyüklüğünü artırır */
+    line-height: 1;
     background-color: #3e4451;
 }
         /* --- DİL SEÇİM MENÜSÜ STİLİ --- */
@@ -538,23 +541,28 @@ window.onload = function() {
     changeLanguage(savedLang); 
 };
 
-// --- MÜZİK KONTROL LOGİĞİ ---
+// --- MÜZİK KONTROL LOGİĞİ (Font Awesome İkonlarıyla) ---
 
 const audio = document.getElementById('backgroundAudio');
 const toggleButton = document.getElementById('musicToggle');
 let isPlaying = false;
 
+// Sayfa yüklendiğinde varsayılan simgeyi Sessiz olarak ayarla (Oynatılmadığı için)
+toggleButton.innerHTML = '<i class="fas fa-volume-off"></i>';
+
 toggleButton.addEventListener('click', () => {
     if (isPlaying) {
         audio.pause();
-        toggleButton.innerHTML = '▶️'; // Oynat simgesi
+        // Pause yapınca: Ses Kapalı ikonu
+        toggleButton.innerHTML = '<i class="fas fa-volume-off"></i>'; 
     } else {
-        // Kullanıcı etkileşimi ile ses çalmaya başlar
         audio.play().then(() => {
-            toggleButton.innerHTML = '⏸️'; // Duraklat simgesi
+            // Play yapınca: Ses Açık ikonu
+            toggleButton.innerHTML = '<i class="fas fa-volume-up"></i>'; 
         }).catch(error => {
+            // Hata olursa: Çarpı işaretli/Sessiz ikonu
             console.error("Müzik çalma engellendi:", error);
-            toggleButton.innerHTML = '🔇'; // Sessiz simgesi (Hata durumunda)
+            toggleButton.innerHTML = '<i class="fas fa-volume-mute"></i>'; 
         });
     }
     isPlaying = !isPlaying;
@@ -566,6 +574,7 @@ const countdownInterval = setInterval(updateCountdown, 1000);
 
 </body>
 </html>
+
 
 
 
