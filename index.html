@@ -9,10 +9,10 @@
     <style>
         /* Solana Theme & Modern Look */
         body {
-    /* Eski background-color: #121212; satırını bu yeni blok ile değiştirin: */
-    background: linear-gradient(-45deg, #121212, #200030, #121212, #003333); /* Koyu, Mor ve Turkuaz tonları */
-    background-size: 400% 400%; /* Animasyonun hareket etmesi için boyutunu büyüt */
-    animation: gradient-animation 20s ease infinite; /* 20 saniyede yumuşakça tekrar et */
+    
+    background: linear-gradient(-45deg, #121212, #200030, #121212, #003333);
+    background-size: 400% 400%; 
+    animation: gradient-animation 20s ease infinite;
 
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
     color: #E0E0E0; 
@@ -32,10 +32,10 @@
             max-width: 120px;
             border-radius: 10px;
             margin-bottom: 15px;
-            border: 3px solid #9945FF; /* Solana Moru */
+            border: 3px solid #9945FF; 
         }
         .social a {
-            color: #00bcd4; /* Turkuaz */
+            color: #00bcd4; 
             margin: 0 15px;
             text-decoration: none;
             font-weight: 600;
@@ -62,7 +62,7 @@
         }
         #sendButton {
             padding: 10px 30px;
-            background-color: #9945FF; /* Solana Moru */
+            background-color: #9945FF; 
             color: white;
             border: none;
             border-radius: 5px;
@@ -74,8 +74,8 @@
             background-color: #8039d6;
         }
         #sendButton.success-feedback {
-           /* BAŞARILI GÖNDERİM SONRASI GEÇİCİ RENK */
-            background-color: #4CAF50 !important; /* Yeşil ve zorunlu */
+          
+            background-color: #4CAF50 !important;
             transition: background-color 0.1s;
         }
         #message {
@@ -120,17 +120,17 @@
     100% { background-position: 0% 50%; }
 }
 
-/* --- YENİ MÜZİK KONTROL DÜĞMESİ STİLİ --- */
-.fixed-control {
-    position: fixed; /* Ekranda sabit kalmasını sağlar */
-    top: 20px;       /* Üstten 20 piksel boşluk */
-    left: 20px;      /* Soldan 20 piksel boşluk */
-    z-index: 1000;   /* Diğer her şeyin üstünde görünmesini sağlar */
 
-    /* Görünüm ayarları (Solana temasına uygun) */
-    background-color: #2c2c2c; /* Koyu arkaplan */
-    color: #00bcd4; /* Turkuaz metin */
-    border: 1px solid #9945FF; /* Mor çerçeve */
+.fixed-control {
+    position: fixed;
+    top: 20px;      
+    left: 20px;      
+    z-index: 1000;   
+
+  
+    background-color: #2c2c2c; 
+    color: #00bcd4; 
+    border: 1px solid #9945FF; 
     border-radius: 6px;
     padding: 8px 12px; 
     cursor: pointer;
@@ -139,49 +139,49 @@
 }
 
 .fixed-control:hover {
-    font-size: 18px; /* İkonun büyüklüğünü artırır */
+    font-size: 18px; 
     line-height: 1;
     background-color: #3e4451;
 }
-        /* --- DİL SEÇİM MENÜSÜ STİLİ --- */
+        
 
-/* Select menüsünü gizleyen ve arkaplanı ayarlayan ana div */
+
 #language-switcher {
     position: absolute;
     top: 20px;
     right: 20px;
-    /* Renk ve font ayarları */
+  
     color: white; 
     font-size: 14px;
 }
 
-/* Kendine ait varsayılan stili kaldıran ve sitenin temasına uyduran kod */
+
 #langSelector {
-    /* Görünüm sıfırlama */
+    
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
     
-    /* Boyut ve dolgu */
+   
     padding: 8px 12px; 
-    padding-right: 30px; /* Ok simgesi için yer açar */
+    padding-right: 30px; 
     
-    /* Renkler */
-    background-color: #2c2c2c; /* Koyu gri arkaplan */
-    color: #00bcd4; /* Turkuaz metin */
-    border: 1px solid #9945FF; /* Solana Moru çerçeve */
+    
+    background-color: #2c2c2c; 
+    color: #00bcd4;
+    border: 1px solid #9945FF; 
     border-radius: 6px;
     cursor: pointer;
     font-weight: 600;
 }
 
-/* Seçenekleri (option) daha okunur hale getirir */
+
 #langSelector option {
-    background-color: #1f1f1f; /* Koyu arkaplan */
+    background-color: #1f1f1f; 
     color: #E0E0E0;
 }
 
-/* Menü üzerine gelindiğinde rengi değiştirir */
+
 #langSelector:hover {
     background-color: #3e4451;
 }
@@ -244,11 +244,11 @@
 </div>
 
 <script>
-// --- JAVASCRIPT LOGIC (Düzeltilmiş Versiyon) ---
 
-// ***** 1. ÇEVİRİ VERİLERİ (Diğer dilleri buraya ekleyin) *****
+
+
 const translations = {
-    // 1. İNGİLİZCE (EN - Zaten Mevcut)
+    // 1.(EN)
     en: {
         title: "💸 Honeydrop Early Airdrop Registration 💸",
         description: "Thank you for being an early supporter! Submit your Solana wallet address below to enter our exclusive airdrop list.",
@@ -265,7 +265,7 @@ const translations = {
         success: "✅ Your address has been successfully submitted to the Airdrop List!",
         closedTimer: "REGISTRATION CLOSED!"
     },
-    // 2. TÜRKÇE (TR - Zaten Mevcut)
+    // 2.(TR)
     tr: {
         title: "💸 Honeydrop Erken Airdrop Kaydı 💸",
         description: "Erken destekçimiz olduğunuz için teşekkürler! Özel airdrop listemize girmek için Solana cüzdan adresinizi aşağıya gönderin.",
@@ -282,7 +282,7 @@ const translations = {
         success: "✅ Adresiniz Airdrop Listesine Başarıyla Eklendi!",
         closedTimer: "KAYIT KAPANDI!"
     },
-    // 3. ARAPÇA (AR)
+    // 3.(AR)
     ar: {
         title: "💸 تسجيل الإنزال الجوي المبكر لـ Honeydrop 💸",
         description: "شكرًا لكونك داعمًا مبكرًا! أرسل عنوان محفظتك أدناه للدخول في قائمة الإنزال الجوي الحصرية.",
@@ -299,7 +299,7 @@ const translations = {
         success: "✅ تم إضافة عنوانك بنجاح إلى قائمة الإنزال الجوي!",
         closedTimer: "تم إغلاق التسجيل!"
     },
-    // 4. İSPANYOLCA (ES)
+    // 4.(ES)
     es: {
         title: "💸 Registro Anticipado de Airdrop Honeydrop 💸",
         description: "¡Gracias por ser un early adopter! Envía tu dirección de billetera Solana para entrar en nuestra lista exclusiva de airdrops.",
@@ -316,7 +316,7 @@ const translations = {
         success: "✅ ¡Tu dirección se ha enviado con éxito a la Lista de Airdrops!",
         closedTimer: "¡REGISTRO CERRADO!"
     },
-    // 5. İTALYANCA (IT)
+    // 5.(IT)
     it: {
         title: "💸 Registrazione Airdrop Anticipata Honeydrop 💸",
         description: "Grazie per essere un early supporter! Inserisci il tuo indirizzo di portafoglio Solana per entrare nella nostra lista airdrop esclusiva.",
@@ -333,7 +333,7 @@ const translations = {
         success: "✅ Il tuo indirizzo è stato inviato con successo alla Lista Airdrop!",
         closedTimer: "REGISTRAZIONE CHIUSA!"
     },
-    // 6. FRANSIZCA (FR)
+    // 6.(FR)
     fr: {
         title: "💸 Inscription Airdrop Précoce Honeydrop 💸",
         description: "Merci d'être un early supporter ! Soumettez votre adresse de portefeuille Solana ci-dessous pour entrer dans notre liste airdrop exclusive.",
@@ -350,7 +350,7 @@ const translations = {
         success: "✅ Votre adresse a été soumise avec succès à la Liste Airdrop !",
         closedTimer: "INSCRIPTION FERMÉE !"
     },
-    // 7. RUSÇA (RU)
+    // 7.(RU)
     ru: {
         title: "💸 Ранняя Регистрация Airdrop Honeydrop 💸",
         description: "Спасибо за вашу раннюю поддержку! Отправьте свой адрес кошелька Solana ниже, чтобы попасть в наш эксклюзивный список airdrop.",
@@ -367,7 +367,7 @@ const translations = {
         success: "✅ Ваш адрес успешно добавлен в список Airdrop!",
         closedTimer: "РЕГИСТРАЦИЯ ЗАКРЫТА!"
     },
-    // 8. ALMANCA (DE)
+    // 8.(DE)
     de: {
         title: "💸 Honeydrop Frühe Airdrop-Registrierung 💸",
         description: "Vielen Dank, dass Sie uns frühzeitig unterstützen! Senden Sie Ihre Solana Wallet-Adresse unten ein, um in unsere exklusive Airdrop-Liste aufgenommen zu werden.",
@@ -386,18 +386,18 @@ const translations = {
     }
 };
 
-let currentLang = 'en'; // Varsayılan dil
+let currentLang = 'en';
 const SUBMISSION_KEY = 'airdrop_submitted';
-const endDate = new Date(2025, 10, 7, 15, 0, 0); // Sadece bir kere tanımlanmalı!
+const endDate = new Date(2026, 02, 24, 15, 0, 0);
 const countdownElement = document.getElementById('countdown');
 
 
-// Yeni Fonksiyon: Metinleri günceller
+
 function updateTexts(lang) {
     const t = translations[lang];
     if (!t) return;
 
-    // 🎯 DOM Metinlerini Güncelleme
+    
     document.querySelector('h1').innerText = t.title;
     document.querySelector('.container > p:not(.countdown-box p)').innerText = t.description; 
     document.querySelector('.input-area p:first-child').innerText = t.submitPrompt;
@@ -405,19 +405,19 @@ function updateTexts(lang) {
     document.querySelector('[id^="contractAddress"]').previousElementSibling.innerText = t.contractLabel;
     document.querySelector('.countdown-box p:first-child').innerText = t.countdownLabel;
     
-    // Buton ve Durum kontrolünü güncelle
+
     checkSubmissionStatus(); 
     updateCountdown(); 
 }
 
-// Dil değiştirme olayını yakalar
+
 function changeLanguage(lang) {
     currentLang = lang;
     updateTexts(lang);
     localStorage.setItem('airdrop_lang', lang); 
 }
 
-// Sayfa yüklendiğinde kontrolü yapan fonksiyon (LocalStorage)
+
 function checkSubmissionStatus() {
     const messageElement = document.getElementById('message');
     const sendButton = document.getElementById('sendButton');
@@ -425,24 +425,21 @@ function checkSubmissionStatus() {
     const t = translations[currentLang]; // Mevcut dili al
 
     if (localStorage.getItem(SUBMISSION_KEY)) {
-        // Eğer cihaz daha önce göndermişse
         messageElement.style.color = '#ff9800'; 
         messageElement.innerText = t.errorSubmitted;
         sendButton.disabled = true;
         sendButton.innerText = t.submittedBtn;
         inputElement.disabled = true;
     } else if (new Date().getTime() > endDate.getTime()) {
-         // Geri sayım bittiyse
         sendButton.disabled = true;
         sendButton.innerText = t.closedBtn;
         inputElement.disabled = true;
         messageElement.innerText = t.closedTimer;
     } else {
-        // Butonu aktif hale getir ve metnini ayarla (Dil değişimi için önemli)
         sendButton.disabled = false;
         sendButton.innerText = t.submitBtn;
         inputElement.disabled = false;
-        messageElement.innerText = ''; // Hata mesajını temizle
+        messageElement.innerText = '';
     }
 }
 
@@ -451,14 +448,14 @@ function checkSubmissionStatus() {
 function updateCountdown() {
     const now = new Date().getTime();
     const distance = endDate.getTime() - now;
-    const t = translations[currentLang]; // Mevcut dili al
+    const t = translations[currentLang];
 
     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
     const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    // DİLLERİ KULLAN
+
     countdownElement.innerHTML = 
         `<span>${days} <small>${t.days}</small></span>` + 
         `<span>${hours} <small>${t.hours}</small></span>` + 
@@ -475,7 +472,7 @@ function updateCountdown() {
 }
 
 
-// 2. ADDRESS SUBMISSION (BUTON GERİ BİLDİRİMİ EKLENDİ)
+
 function sendAddress() {
     const inputElement = document.getElementById('addressInput');
     const messageElement = document.getElementById('message');
@@ -483,41 +480,40 @@ function sendAddress() {
     const address = inputElement.value.trim();
     const t = translations[currentLang]; 
 
-    // Gelişmiş Solana Adresi Doğrulama (Basit kontrol)
+  
     const isValidSolanaAddress = address.length >= 32 && address.length <= 44; 
 
     if (!isValidSolanaAddress) {
         messageElement.style.color = '#f44336'; // Red
         messageElement.innerText = t.errorInvalid;
     } else {
-        // Başarı Mesajı
+        
         messageElement.style.color = '#4CAF50'; // Green
         messageElement.innerText = t.success;
         
-        // *** YENİ BUTON GERİ BİLDİRİM MANTIĞI BAŞLANGICI ***
+      
         
-        // 1. Butona anında yeşil renk ver
+        
         sendButton.classList.add('success-feedback');
         
-        // 2. Butonu ve giriş alanını devre dışı bırak
+       
         sendButton.disabled = true;
         sendButton.innerText = t.submittedBtn;
         inputElement.disabled = true;
         inputElement.value = '';
         
-        // 3. LocalStorage'a kaydet
+        
         localStorage.setItem(SUBMISSION_KEY, 'true'); 
         
-        // 4. (Opsiyonel): 500 milisaniye sonra yeşil rengi kaldır (daha temiz görünmesi için)
+     
         setTimeout(() => {
              sendButton.classList.remove('success-feedback');
         }, 500);
 
-        // *** YENİ BUTON GERİ BİLDİRİM MANTIĞI BİTİŞİ ***
+       
     }
 }
 
-// 3. COPY TO CLIPBOARD FUNCTION (Aynı kalıyor)
 function copyToClipboard(elementId, messageId) {
     const textToCopy = document.getElementById(elementId).innerText;
     navigator.clipboard.writeText(textToCopy).then(() => {
@@ -531,36 +527,35 @@ function copyToClipboard(elementId, messageId) {
     });
 }
 
-// *** BAŞLANGIÇ YÜKLEME VE DİL AYARI ***
+
 window.onload = function() {
-    // LocalStorage'dan kayıtlı dili yükle
+  
     const savedLang = localStorage.getItem('airdrop_lang') || 'en';
     document.getElementById('langSelector').value = savedLang;
     
-    // Sayfanın tüm metinlerini ve durumunu ayarla
+    
     changeLanguage(savedLang); 
 };
 
-// --- MÜZİK KONTROL LOGİĞİ (Font Awesome İkonlarıyla) ---
+
 
 const audio = document.getElementById('backgroundAudio');
 const toggleButton = document.getElementById('musicToggle');
 let isPlaying = false;
 
-// Sayfa yüklendiğinde varsayılan simgeyi Sessiz olarak ayarla (Oynatılmadığı için)
+
 toggleButton.innerHTML = '<i class="fas fa-volume-off"></i>';
 
 toggleButton.addEventListener('click', () => {
     if (isPlaying) {
         audio.pause();
-        // Pause yapınca: Ses Kapalı ikonu
+       
         toggleButton.innerHTML = '<i class="fas fa-volume-off"></i>'; 
     } else {
         audio.play().then(() => {
-            // Play yapınca: Ses Açık ikonu
             toggleButton.innerHTML = '<i class="fas fa-volume-up"></i>'; 
         }).catch(error => {
-            // Hata olursa: Çarpı işaretli/Sessiz ikonu
+           
             console.error("Müzik çalma engellendi:", error);
             toggleButton.innerHTML = '<i class="fas fa-volume-mute"></i>'; 
         });
@@ -568,12 +563,12 @@ toggleButton.addEventListener('click', () => {
     isPlaying = !isPlaying;
 });
 
-// Timer'ı başlat
 const countdownInterval = setInterval(updateCountdown, 1000);
 </script>
 
 </body>
 </html>
+
 
 
 
